@@ -1,0 +1,112 @@
+﻿<Window x:Class="prueba1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:prueba1"
+        Title="SICB-GAN SEMAR" Height="750" Width="1100"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized" Background="#F0F2F5">
+
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="#00204A" BorderBrush="#D4AF37" BorderThickness="0,0,0,5">
+            <Grid Margin="25,0">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="SECRETARÍA DE MARINA" Foreground="White" FontSize="26" FontWeight="Black"/>
+                    <TextBlock Text="SISTEMA INTEGRAL DE CONTROL BIOMÉTRICO" Foreground="#D4AF37" FontSize="14" FontWeight="Bold"/>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">
+                    <StackPanel Margin="0,0,15,0">
+                        <TextBlock Text="DÉCIMA SEXTA ZONA NAVAL" Foreground="White" FontSize="12" HorizontalAlignment="Right"/>
+                        <TextBlock Text="{Binding FechaHoraActual}" Foreground="#D4AF37" FontSize="20" FontWeight="Black"/>
+                    </StackPanel>
+
+                    <Button Width="50" Height="50" Background="Transparent" BorderThickness="0" Cursor="Hand" Click="OpenLogin_Click">
+                        <StackPanel>
+                            <TextBlock Text="👤" FontSize="24" Foreground="#D4AF37" HorizontalAlignment="Center"/>
+                            <TextBlock Text="LOGIN" FontSize="9" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <Border Background="White" Width="900" Height="520" CornerRadius="20"
+                    BorderBrush="{Binding StatusColor}" BorderThickness="8">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="20" ShadowDepth="5" Opacity="0.2"/>
+                </Border.Effect>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Background="{Binding StatusColor}" CornerRadius="12,12,0,0">
+                        <TextBlock Text="{Binding StatusMensaje}" Foreground="White" FontSize="32" 
+                                   FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+
+                    <Grid Grid.Row="1" Margin="40">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="280"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                            <Border BorderBrush="#DDD" BorderThickness="2" Height="300" Background="#F9F9F9">
+                                <Image Source="{Binding MarinoActual.FotoPath}" Margin="5" Stretch="UniformToFill"/>
+                            </Border>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" Margin="50,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="GRADO" Foreground="Gray" FontSize="14" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding MarinoActual.Grado}" FontSize="38" FontWeight="Black" Foreground="#D4AF37"/>
+
+                            <TextBlock Text="NOMBRE" Foreground="Gray" FontSize="14" FontWeight="Bold" Margin="0,15,0,0"/>
+                            <TextBlock Text="{Binding MarinoActual.NombreCompleto}" FontSize="28" FontWeight="Bold" Foreground="#00204A"/>
+
+                            <Grid Margin="0,20,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Text="MATRÍCULA" Foreground="Gray" FontSize="14" FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding MarinoActual.Matricula}" FontSize="22" FontWeight="SemiBold"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="JEFATURA" Foreground="Gray" FontSize="14" FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding MarinoActual.Jefatura}" FontSize="22" FontWeight="SemiBold"/>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+
+
+                        <Button Content="ESCANEAR HUELLA"
+                                    Background="#00204A" Foreground="White" FontWeight="Bold"
+                                    Click="Button_Click" RenderTransformOrigin="0.5,-0.499" Grid.Column="1" Margin="155,301,155,22"/>
+
+                        <Button Content="NUEVO REGISTRO (TEST)" Click="Test_Click" Margin="374,301,10,22" Grid.Column="1"/>
+
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Border Grid.Row="2" Background="#111">
+            <TextBlock Text="SISTEMA DE USO OFICIAL EXCLUSIVO PARA LA SECRETARÍA DE MARINA" 
+                       Foreground="#666" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="11"/>
+        </Border>
+    </Grid>
+</Window>
