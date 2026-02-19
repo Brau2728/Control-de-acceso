@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using prueva1;
+using prueba1;
 
 namespace prueba1
 {
@@ -20,19 +22,25 @@ namespace prueba1
         private void OpenLogin_Click(object sender, RoutedEventArgs e)
         {
             LoginWindow login = new LoginWindow();
-            bool? result = login.ShowDialog();
-
-            if (result == true)
+            
+            if (login.ShowDialog() == true)
             {
-        // Lógica para cambiar la pantalla actual a la de Dashboard
-        // Esto lo haremos con el ContentControl que te mencioné antes
+                if (login.RolUsuario == "Administrador")
+                {
+                    PanelAdminWindow panelAdmin = new PanelAdminWindow();
+                    panelAdmin.ShowDialog(); 
+                }
+                else
+                {
+                    MessageBox.Show("Sesión iniciada como Guardia. Sistema listo.", "Acceso", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
         }
 
         private void Test_Click(object sender, RoutedEventArgs e)
-{
-    RegistroPersonal ventana = new RegistroPersonal();
-    ventana.ShowDialog();
-}
+        {
+            RegistroPersonal ventana = new RegistroPersonal();
+            ventana.ShowDialog();
+        }
     }
 }

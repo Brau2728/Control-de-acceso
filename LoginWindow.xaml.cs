@@ -1,13 +1,15 @@
 using System;
-using System.Data.SqlClient; 
+using System.Data.SqlClient;
 using System.Windows;
-using System.Windows.Controls;
-using prueva1; // <--- ESTO ES LA CLAVE: Importamos el namespace donde vive tu ConexionDB
+using prueva1; // Tu conexión a BD
 
-namespace prueba1 
+namespace prueba1
 {
     public partial class LoginWindow : Window
     {
+        // 1. CREAMOS ESTA PROPIEDAD PARA GUARDAR EL ROL Y QUE LA PANTALLA PRINCIPAL LO LEA
+        public string RolUsuario { get; private set; } = "";
+
         public LoginWindow()
         {
             InitializeComponent();
@@ -26,7 +28,6 @@ namespace prueba1
 
             try
             {
-                // Ahora sí va a encontrar esta clase porque agregamos el 'using prueva1'
                 using (SqlConnection conexion = ConexionDB.ObtenerConexion())
                 {
                     string query = "SELECT Rol FROM Usuarios_Sistema WHERE Username=@user AND PasswordHash=@pass";
@@ -38,8 +39,10 @@ namespace prueba1
 
                     if (resultado != null)
                     {
-                        string rol = resultado.ToString();
-                        MessageBox.Show($"¡Bienvenido {usuario}! Rol: {rol}");
+                        // 2. GUARDAMOS EL ROL AQUÍ ANTES DE CERRAR
+                        RolUsuario = resultado.ToString();
+                        
+                        // 3. INDICAMOS QUE EL LOGIN FUE EXITOSO
                         this.DialogResult = true; 
                     }
                     else
@@ -56,7 +59,7 @@ namespace prueba1
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            this.DialogResult = false;
         }
     }
 }

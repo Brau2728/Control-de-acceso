@@ -35,7 +35,6 @@
                         </StackPanel>
                     </Button>
                 </StackPanel>
-
             </Grid>
         </Border>
 
@@ -92,13 +91,8 @@
                             </Grid>
                         </StackPanel>
 
-
-                        <Button Content="ESCANEAR HUELLA"
-                                    Background="#00204A" Foreground="White" FontWeight="Bold"
-                                    Click="Button_Click" RenderTransformOrigin="0.5,-0.499" Grid.Column="1" Margin="155,301,155,22"/>
-
-                        <Button Content="NUEVO REGISTRO (TEST)" Click="Test_Click" Margin="374,301,10,22" Grid.Column="1"/>
-
+                        <Button Content="ESCANEAR HUELLA" Background="#00204A" Foreground="White" FontWeight="Bold"
+                                Click="Button_Click" Grid.Column="1" Margin="155,301,155,22"/>
                     </Grid>
                 </Grid>
             </Border>
